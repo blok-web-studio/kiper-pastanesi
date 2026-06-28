@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menü — Kiper Pastanesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFAF5;--bg-alt:#F5EDE4;--bg-dark:#1A0E09;--text:#1A0E09;--text-light:#6B4C3B;
+  --text-on-dark:#F0E6D6;--primary:#7A3B10;--primary-light:#B87A4E;--accent:#C49B5E;
+  --accent-light:#E0C9A0;--accent-dim:rgba(196,155,94,0.15);--gold:#A67C2E;
+  --font-heading:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;
+  --radius-sm:8px;--radius-md:16px;--radius-lg:28px;--max-w:1200px;
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --ease-spring-out:cubic-bezier(0.22,1,0.36,1);
+  --nav-h:64px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ===== TOP BAR ===== */
+.top-bar{background:var(--bg-dark);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1002}
+.top-bar a{display:flex;align-items:center;gap:8px;color:var(--accent);font-size:.82rem;font-weight:500;transition:color .3s}
+.top-bar a:hover{color:var(--accent-light)}
+.top-bar .back-arrow svg{width:18px;height:18px}
+
+/* ===== HEADER ===== */
+.menu-header{background:var(--bg-dark);padding:60px 20px 40px;text-align:center;position:relative;overflow:hidden}
+.menu-header::before{content:'';position:absolute;inset:0;opacity:0.03;background:repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(196,155,94,0.4) 24px,rgba(196,155,94,0.4) 25px)}
+.menu-header h1{font-family:var(--font-heading);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:var(--text-on-dark);position:relative}
+.menu-header h1 em{font-style:italic;color:var(--accent);display:block;font-size:.55em;margin-top:8px;letter-spacing:.12em}
+.menu-header p{color:rgba(240,230,214,0.6);font-size:.9rem;margin-top:12px;position:relative}
+
+/* ===== STICKY CATEGORY NAV ===== */
+.cat-nav{position:sticky;top:0;z-index:1001;background:rgba(26,14,9,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,155,94,0.1);overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:flex;gap:2px;padding:8px 16px;min-width:max-content}
+.cat-nav-btn{flex-shrink:0;padding:8px 18px;border-radius:50px;border:1px solid rgba(196,155,94,0.15);background:transparent;color:rgba(240,230,214,0.6);font-family:var(--font-body);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .3s ease;white-space:nowrap;letter-spacing:.02em}
+.cat-nav-btn:hover{border-color:var(--accent);color:var(--text-on-dark);background:rgba(196,155,94,0.08)}
+.cat-nav-btn.active{background:var(--accent);border-color:var(--accent);color:var(--bg-dark);font-weight:600}
+
+/* ===== MENU CONTENT ===== */
+.menu-content{max-width:var(--max-w);margin:0 auto;padding:40px 20px 80px}
+
+/* Category section */
+.cat-section{margin-bottom:48px;scroll-margin-top:90px}
+.cat-section:last-child{margin-bottom:0}
+.cat-heading{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.cat-heading h2{font-family:var(--font-heading);font-size:1.5rem;font-weight:700;color:var(--primary);letter-spacing:.02em;white-space:nowrap}
+.cat-heading .line{flex:1;height:1px;background:linear-gradient(90deg,var(--accent-light),transparent);opacity:0.3}
+
+/* Product grid */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+/* Product card */
+.prod-card{background:var(--bg);border-radius:var(--radius-md);overflow:hidden;border:1px solid rgba(196,155,94,0.08);transition:all .4s var(--ease-spring-out);display:flex;flex-direction:column;cursor:default}
+.prod-card:hover{border-color:var(--accent-light);box-shadow:0 8px 32px rgba(26,14,9,0.08);transform:translateY(-4px)}
+.prod-card .img-wrap{width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--bg-alt);position:relative;flex-shrink:0}
+.prod-card .img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-spring-out)}
+.prod-card:hover .img-wrap img{transform:scale(1.08)}
+.prod-card .img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:2rem;opacity:0.3;background:var(--bg-alt)}
+.prod-card .info{padding:14px 18px 16px;flex:1;display:flex;flex-direction:column;gap:4px}
+.prod-card .name{font-weight:600;font-size:.92rem;color:var(--text);line-height:1.3;transition:color .3s}
+.prod-card:hover .name{color:var(--primary)}
+.prod-card .desc{font-size:.82rem;color:var(--text-light);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prod-card .price-row{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px}
+.prod-card .price{font-family:var(--font-heading);font-size:1.05rem;font-weight:700;color:var(--accent);letter-spacing:.01em}
+.prod-card .price-zero{font-size:.78rem;color:var(--text-light);opacity:0.5;font-style:italic}
+
+/* Responsive */
+@media(max-width:640px){
+  .prod-grid{grid-template-columns:1fr;gap:12px}
+  .cat-heading h2{font-size:1.2rem}
+  .cat-section{margin-bottom:36px}
+  .cat-nav-btn{padding:6px 14px;font-size:.72rem}
+}
+
+/* Scroll reveal */
+[data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease-spring-out),transform .7s var(--ease-spring-out)}
+[data-reveal].visible{opacity:1;transform:translateY(0)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <a href="/kiper-pastanesi/" class="back-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+    Ana Sayfa
+  </a>
+  <span style="color:rgba(240,230,214,0.4);font-size:.75rem;font-weight:500;letter-spacing:.08em">KİPER PASTANESİ</span>
+</div>
+
+<!-- Header -->
+<div class="menu-header">
+  <h1>
+    Menümüz
+    <em>— 1971'den Beri —</em>
+  </h1>
+  <p>Tüm ürünlerimiz günlük ve doğal malzemelerle hazırlanmaktadır.</p>
+</div>
+
+<!-- Sticky Category Nav -->
+<nav class="cat-nav" id="catNav">
+  <div class="cat-nav-inner" id="catNavInner"></div>
+</nav>
+
+<!-- Menu Content -->
+<main class="menu-content" id="menuContent"></main>
+
+<script>
+// ===== MENU DATA =====
+const MENU_DATA =
+[{"name":"KAHVALTILAR","order":1,"products":[{"name":"KİPER KLASİK KAHVALTI (1 KİŞİLİK)","description":"Beyaz Peynir, Kaşar Peyniri, Tulum Peyniri, Siyah Zeytin, Biberli Yeşil Zeytin, Salam, Haşlanmış Yumurta, Bal, Tereyağı, Ev Yapımı Doğal Reçel, Domates, Salatalık, Tatlı Kıl Biber, Mevsim Yeşillikleri, Pişi, Gözleme, Kalem Böreği, Yumurtalı Ekmek ve 1 Kişi için Sınırsız Çay.","price":575.0,"image_url":"assets/img/product/237886_aUl9nE.png","id":237886},{"name":"KİPER SICAK KAHVALTI (1 KİŞİLİK)","description":"Izgara Hellim Peyniri, Izgara Sucuk, Patates Tava, Beyaz Peynir, Taze Kaşar, Tulum Peyniri,  Biberli Yeşil Zeytin, Siyah Zeytin, Ev Yapımı Doğal Reçel, Bal, Tereyağı, Haşlanmış Yumurta, Domates, Salatalık, Tatlı Kıl Biber, Mevsim Yeşillikleri, Kalem Böreği, Gözleme, Pişi, Ege Otlu Börek, Yumurtalı Ekmek ve 1 Kişi için Sınırsız Çay.","price":680.0,"image_url":"assets/img/product/237887_Vzd7sT.png","id":237887},{"name":"EVDEKİ GİBİ KAHVALTI (2 KİŞİLİK)","description":"Izgara Hellim Peyniri, Izgara Sucuk, Patates Tava, Beyaz Peynir, Eski Kaşar, Taze Kaşar, Tulum Peyniri, Biberli Yeşil Zeytin, Siyah Zeytin, Bal, Tereyağı, Ev Yapımı Doğal Reçel, Sahanda Yumurta, Domates, Salatalık, Tatlı Kıl Biber, Mevsim Yeşillikleri, Gözleme, Pişi, Kalem Böreği, Ege Otlu Börek, Yumurtalı Ekmek ve 2 Kişi için Sınırsız Çay.","price":1350.0,"image_url":"assets/img/product/237888_XBEEvH.png","id":237888},{"name":"EGELİ KÖY KAHVALTISI (2 KİŞİLİK )","description":"Izgara Hellim, Beyaz Peynir, İzmir Tulum Peyniri, Eski Kaşar, Biberli Yeşil Zeytin, Siyah Zeytin, Sahanda Yumurta, Ev Yapımı Doğal Reçel, Bal, Tereyağı, Domates, Salatalık, Dereotu, Tatlı Kıl Biber, Ege Otlu Börek, Pişi, Gözleme, Kabak Mücver, Yumurtalı Ekmek ve 2 Kişi için Sınırsız Çay.","price":1100.0,"image_url":"assets/img/product/237889_fTwTpr.png","id":237889},{"name":"JUMBO KAHVALTI (3 KİŞİLİK)","description":"Beyaz Peynir, Tulum Peyniri, Taze Kaşar, Eski Kaşar, Biberli Yeşil Zeytin, Siyah Zeytin, Menemen, Sahanda Yumurta, Patates Tava, Salam, Domates, Salatalık, Tatlı Kıl Biber, Bal, Tereyağı,  Ev Yapımı Doğal Reçel, Pişi, Gözleme, Kalem Böreği, Ege Otlu Börek, Yumurtalı Ekmek ve 3 Kişi için Sınırsız Çay","price":1750.0,"image_url":"assets/img/product/237890_Z67a57.png","id":237890},{"name":"JUMBO KAHVALTI (4 KİŞİLİK)","description":"Beyaz Peynir, Tulum Peyniri, Taze Kaşar, Eski Kaşar, Biberli Yeşil Zeytin, Siyah Zeytin, Menemen, Sahanda Yumurta, Patates Tava, Salam, Domates, Salatalık, Tatlı Kıl Biber, Bal, Tereyağı,  Ev Yapımı Doğal Reçel, Pişi, Gözleme, Kalem Böreği, Ege Otlu Börek, Yumurtalı Ekmek ve 4 Kişi için Sınırsız Çay.","price":2250.0,"image_url":"assets/img/product/237891_5eAsGp.png","id":237891},{"name":"EKSPRES KAHVALTI (1 KİŞİLİK)","description":"1 Adet Simit, Beyaz Peynir, Taze Kaşar, Sahanda Yumurta, Siyah Zeytin, Izgara Yeşil Zeytin, Zeytin Salatası, Domates, Salatalık, Kekikli Lor, Mevsim Yeşillikleri ve Bir Bardak Çay.","price":425.0,"image_url":"assets/img/product/237892_C9EJak.png","id":237892},{"name":"PANCAKE KAHVALTI","description":"Pancake, Çikolata Kreması, Bal, Muz, Kivi, Çilek .","price":450.0,"image_url":"assets/img/product/237893_KYHvtr.png","id":237893},{"name":"MUHLAMA","description":"Kolot Peyniri, Mısır Unu ve Trabzon Tereyağı.","price":375.0,"image_url":"assets/img/product/237894_fpQlZ4.png","id":237894},{"name":"GÜNÜN ÇORBASI","description":"","price":200.0,"image_url":"assets/img/product/237895_0SHuws.png","id":237895},{"name":"SÖĞÜŞ TABAĞI","description":"Beyaz Peynir, Siyah Zeytin, Izgara Yeşil Zeytin, Zeytin Salatası, Domates, Salatalık, Tatlı Kıl Biber ve Mevsim Yeşillikleri.","price":0.0,"image_url":"assets/img/product/237896_0gGhNS.png","id":237896},{"name":"GÖZLEMELİ KAHVALTI TABAĞI","description":"Peynirli Gözleme, Domates, Salatalık, Mevsim Yeşillikleri, Siyah Zeytin, Biberli Yeşil Zeytin ve Bir Bardak Çay","price":375.0,"image_url":"assets/img/product/237897_Gt3LeE.png","id":237897}]},{"name":"OMLETLER","order":3,"products":[{"name":"PİZZA OMLET","description":"Domates, Maydanoz, Siyah Zeytin, Beyaz Peynir Ve Eritilmiş Kaşar Peyniri, Reçelli Lor","price":275.0,"image_url":"assets/img/product/237898_20GlVC.png","id":237898},{"name":"KARIŞIK OMLET","description":"Sucuk, Salam, Mantar, Kaşar Peyniri, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":400.0,"image_url":"assets/img/product/237899_TA0Y2g.png","id":237899},{"name":"SADE OMLET","description":"Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":200.0,"image_url":"assets/img/product/237900_163b1w.png","id":237900},{"name":"PEYNİRLİ OMLET","description":"Beyaz Peynir, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":300.0,"image_url":"assets/img/product/237901_r3HRS6.png","id":237901},{"name":"KAŞARLI OMLET","description":"Kaşar Peyniri, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":300.0,"image_url":"assets/img/product/237902_9YrUnT.png","id":237902},{"name":"MANTARLI OMLET","description":"Mantar, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":250.0,"image_url":"assets/img/product/237903_85T1Zy.png","id":237903},{"name":"SUCUKLU OMLET","description":"Sucuk, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":400.0,"image_url":"assets/img/product/237904_7HWukW.png","id":237904},{"name":"SUCUKLU-KAŞARLI OMLET","description":"Sucuk, Kaşar, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":420.0,"image_url":"assets/img/product/237905_aJndg8.png","id":237905},{"name":"MANTARLI KAŞARLI OMLET","description":"Mantar, Kaşar Peyniri, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri.","price":300.0,"image_url":"assets/img/product/237906_phryof.png","id":237906},{"name":"SEBZELİ OMLET","description":"Mantar, Kapya Biber, Yeşilbiber, Domates, Salatalık, Siyah Zeytin, Biberli Yeşil Zeytin, Reçelli Lor ve Mevsim Yeşillikleri ","price":275.0,"image_url":"assets/img/product/237907_kLcF3Z.png","id":237907}]},{"name":"MENEMENLER","order":4,"products":[{"name":"Menemen","description":"","price":250.0,"image_url":"assets/img/product/237908_sZTy7z.png","id":237908},{"name":"Beyaz Peynirli Menemen","description":"","price":275.0,"image_url":"assets/img/product/237909_Q62A93.png","id":237909},{"name":"Kaşarlı Menemen","description":"","price":275.0,"image_url":"assets/img/product/237910_phAPSU.png","id":237910},{"name":"Sucuklu Menemen","description":"","price":375.0,"image_url":"assets/img/product/237911_nytxpa.png","id":237911},{"name":"Sucuklu Kaşarlı Menemen","description":"","price":400.0,"image_url":"assets/img/product/237912_6DjGUU.png","id":237912},{"name":"Kavurmalı Menemen","description":"","price":500.0,"image_url":"assets/img/product/237913_Jw33t7.png","id":237913}]},{"name":"SAHANDA YUMURTA","order":5,"products":[{"name":"Sahanda Tereyağlı Yumurta","description":"","price":175.0,"image_url":"assets/img/product/237914_k02Ed3.png","id":237914},{"name":"Sahanda Tereyağlı, Sucuklu Yumurta","description":"","price":350.0,"image_url":"assets/img/product/237915_6JgtW5.png","id":237915},{"name":"Sahanda Tereyağlı, Beyaz Peynirli Yumurta","description":"","price":250.0,"image_url":"assets/img/product/237916_Vj9cdr.png","id":237916},{"name":"Sahanda Tereyağlı, Kaşar Peynirli Yumurta","description":"","price":250.0,"image_url":"assets/img/product/237917_3pcY78.png","id":237917},{"name":"Sahanda Tereyağlı, Kavurmalı Yumurta","description":"","price":500.0,"image_url":"assets/img/product/237918_NBf7zR.png","id":237918}]},{"name":"KİREMİTTE","order":6,"products":[{"name":"KİREMİTTE SUCUK","description":"Tereyağı ile Kızarmış Kasap Sucuk Dilimleri, Domates ve Biber","price":550.0,"image_url":"assets/img/product/237919_PUCKQl.png","id":237919},{"name":"KİREMİTTE KAVURMA","description":"150 gr. Tereyağı ile Kızarmış Kendi Tarifimize Göre Hazırladığımız Dana Eti Kavurma, Domates ve Biber","price":850.0,"image_url":"assets/img/product/237920_YYd1fP.png","id":237920}]},{"name":"TOSTLAR","order":7,"products":[{"name":"AYVALIK TOST","description":"Salam, Sucuk, Kaşar Peyniri, Domates, Turşu, Patates Tava ve Amerikan Salata","price":400.0,"image_url":"assets/img/product/237921_H6776H.png","id":237921},{"name":"AKDENİZ TOST","description":"Siyah Zeytin Dilimleri, Beyaz Peynir, Kaşar Peynir, Pul Biber, Kekik, Siyah Zeytin, Izgara Yeşil Zeytin, Salatalık, Domates ve Patates Tava","price":300.0,"image_url":"assets/img/product/237922_MpvWFN.png","id":237922},{"name":"KAŞARLI TOST","description":"Kaşar Peyniri, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Patates Tava","price":275.0,"image_url":"assets/img/product/237923_wjxdEz.png","id":237923},{"name":"SUCUKLU KAŞARLI TOST","description":"Sucuk, Kaşar Peyniri, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Patates Tava","price":350.0,"image_url":"assets/img/product/237924_N4F2vY.png","id":237924},{"name":"KARIŞIK TOST","description":"Salam, Sucuk, Kaşar Peyniri, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Patates Tava","price":375.0,"image_url":"assets/img/product/237925_Xj3Oe3.png","id":237925},{"name":"KAVURMALI KAŞARLI TOST","description":"40 gr. Kavurma, Kaşar Peyniri, Kekik, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Patates Tava","price":550.0,"image_url":"assets/img/product/237926_hp7aFy.png","id":237926},{"name":"KEPEKLİ TOST","description":"Light Beyaz Peynir, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Mevsim Yeşillikleri","price":250.0,"image_url":"assets/img/product/237927_S6dl7k.png","id":237927},{"name":"BEYAZ PEYNİRLİ DOMATESLİ TOST","description":"Beyaz Peynir, Siyah Zeytin, Izgara Yeşil Zeytin, Domates, Salatalık ve Mevsim Yeşillikleri","price":300.0,"image_url":"assets/img/product/237928_JZUu3b.png","id":237928}]},{"name":"WRAP’LAR","order":9,"products":[{"name":"TAVUKLU WRAP","description":"180 gr. Jülyen Doğranmış Tavuk Parçaları, Kaşar Peyniri, Renkli Biberler, Soya Sosu, Mısır, Karamelize Soğan, Mantar ve Meksikan Sos. (Kaşık Patates Tava ve Mevsim Salatası ile servis edilmektedir.)","price":475.0,"image_url":"assets/img/product/237932_jFE1Mr.png","id":237932},{"name":"ÇITIR TAVUK WRAP","description":"170 gr. Özel Pane Harcı İle Harmanlanmış Tavuk Parçaları, Kaşar Peynir, Turşu, Renkli Biberler ve Meksikan Sos (Kaşık Patates Tava ve Mevsim Yeşillikleri ile Servis Edilmemektedir.)","price":425.0,"image_url":"assets/img/product/605844_6UVg4y.png","id":605844}]},{"name":"ATIŞTIRMALIKLAR","order":10,"products":[{"name":"KALEM BÖREĞİ","description":"Domates, Salatalık, Siyah Zeytin, Izgara Yeşil Zeytin, Özel Yoğurt Sos eşliğinde","price":250.0,"image_url":"assets/img/product/237935_2Spwg6.png","id":237935},{"name":"IZGARA HELLİM","description":"Domates, Salatalık ve Mevsim Yeşillikleri eşliğinde.","price":220.0,"image_url":"assets/img/product/237936_zdKE3p.png","id":237936},{"name":"SOĞAN HALKASI","description":"Kaşık Patates Tava ve Meksikan Sos eşliğinde.","price":220.0,"image_url":"assets/img/product/237937_LF4sko.png","id":237937},{"name":"KAŞIK PATATES TAVA","description":"","price":250.0,"image_url":"assets/img/product/237938_kJQRfF.png","id":237938},{"name":"PARMAK PATATES TAVA","description":"","price":250.0,"image_url":"assets/img/product/237939_6UnRyY.png","id":237939},{"name":"EGE OTLU BÖREK","description":"Domates, Salatalık, Siyah Zeytin, Izgara Yeşil Zeytin, Özel Yoğurt Sos eşliğinde.","price":250.0,"image_url":"assets/img/product/237940_cFKbwt.png","id":237940},{"name":"COMBO TABAĞI","description":"Soğan Halkaları, Kaşık Patates Tava, Izgara Hellim Peyniri, Kokteyl Sosis, Kalem Böreği, Ege Otlu Börek, Meksikan Sos ve Özel Yoğurt Sos eşliğinde.","price":400.0,"image_url":"assets/img/product/237941_R9Slow.png","id":237941},{"name":"ATIŞTIRMALIK TABAĞI","description":"","price":350.0,"image_url":"assets/img/product/605589_HeuMws.png","id":605589}]},{"name":"BURGERLER","order":11,"products":[{"name":"KLASİK BURGER","description":"150 gr. Hamburger Köftesi, Marul, Domates, Turşu, Burger Sos ve Kaşık Patates Tava","price":480.0,"image_url":"assets/img/product/237942_fR4Mtw.png","id":237942},{"name":"CHEESE BURGER","description":"150 gr. Hamburger Köftesi, Cheddar Peyniri, Marul, Domates, Turşu, Burger Sos ve Kaşık Patates Tava.","price":500.0,"image_url":"assets/img/product/237943_Smp1p0.png","id":237943},{"name":"ÇITIR TAVUK BURGER","description":"180 gr. Panelenmiş Tavuk Köftesi, Çift Kat Cheddar Peyniri, Domates, Marul, Turşu, Burger Sos ve Kaşık Patates Tava.","price":400.0,"image_url":"assets/img/product/237944_ev5XhP.png","id":237944},{"name":"MİNİ BURGER","description":"3 Adet 120 gr. Mini Hamburger Köftesi, Marul, Domates, Turşu, Burger Sos ve Kaşık Patates Tava.","price":425.0,"image_url":"assets/img/product/237945_tFNaFb.png","id":237945}]},{"name":"SANDVİÇLER","order":12,"products":[{"name":"JÜLYEN TAVUKLU SANDVİÇ","description":"Baget Ekmeği Arasında Özel Baharatlar İle Tatlandırılmış 180 gr. Jülyen Tavuk Parçaları, Mevsim Yeşillikleri, Domates, Turşu ve Kaşık Patates Tava.","price":350.0,"image_url":"assets/img/product/237948_asWFJt.png","id":237948},{"name":"BEYAZ PEYNİRLİ SANDVİÇ","description":"Baget Ekmeği Arasında Beyaz Peynir, Mevsim Yeşillikleri, Domates, Salatalık.","price":300.0,"image_url":"assets/img/product/237951_wDkz0x.png","id":237951},{"name":"KAŞAR PEYNİRLİ SANDVİÇ","description":"Baget Ekmeği Arasında Taze Kaşar Peyniri, Mevsim Yeşillikleri, Domates, Salatalık.","price":300.0,"image_url":"assets/img/product/237952_NkBO1k.png","id":237952},{"name":"KARIŞIK SANDVİÇ","description":"Baget Ekmeği Arasında Salam, Taze Kaşar Peyniri, Mevsim Yeşillikleri, Domates Salatalık.","price":325.0,"image_url":"assets/img/product/237953_0YJPv5.png","id":237953}]},{"name":"SALATALAR","order":13,"products":[{"name":"SEZAR SALATA","description":"240 gr. Izgara Tavuk Dilimleri, Iceberg, Parmesan Peyniri, Kroton Ekmek ve Sezar Sos.","price":350.0,"image_url":"assets/img/product/237954_0AuuLO.png","id":237954},{"name":"TON BALIKLI SALATA","description":"160 gr. Ton Balığı, Siyah Zeytin Dilimleri, Mısır Taneleri, Mevsim Yeşillikleri, Kroton ekmek ve Zeytinyağ Sos","price":450.0,"image_url":"assets/img/product/237956_7BPcEc.png","id":237956},{"name":"MEVSİM SALATA","description":"Icerberg, Kırmızı Lahana, Havuç, Domates, Salatalık, Mısır, Zeytinyağ Sos.","price":250.0,"image_url":"assets/img/product/237957_ZzpFjZ.png","id":237957},{"name":"ÇITIR TAVUK SALATA","description":"","price":350.0,"image_url":"assets/img/product/605590_ogJ3l8.png","id":605590}]},{"name":"KREPLER","order":14,"products":[{"name":"TAVUKLU MANTARLI KREP","description":"150 gr.Sotelenmiş Tavuk Parçaları, Kaşar Peyniri, Beşamel Sos, Mantar, Havuç ve Özel Yoğurt Sos. (Kaşık Patates Tava ve Akdeniz Yeşillikleri Salatası ile servis edilmektedir.)","price":450.0,"image_url":"assets/img/product/237959_4FrzKZ.png","id":237959}]},{"name":"MAKARNALAR","order":15,"products":[{"name":"EV USULÜ MANTI","description":"Taze Ev Mantısı, Yoğurt, Nane ve Acılı Tereyağ Sos (Sarımsaklı ve Sarımsaksız Yoğurt Seçeneği ile)","price":350.0,"image_url":"assets/img/product/237962_TLMrP5.png","id":237962},{"name":"FETTUCİNİ ALFREDO","description":"Kremalı Mantarlı Sos, 90 gr. Izgara Tavuk Parçaları, Parmesan Peyniri ve Fesleğen Sos","price":400.0,"image_url":"assets/img/product/237963_wW8ves.png","id":237963},{"name":"SPAGHETTI BOLONEZ","description":"Kıymalı Bolonez Sos, Parmesan Peyniri ve Fesleğen Sos","price":400.0,"image_url":"assets/img/product/237964_oUlUYM.png","id":237964},{"name":"PENNE ARABIATTA","description":"Acılı Domates Sos, Siyah Zeytin Dilimleri, Parmesan Peyniri ve Fesleğen Sos","price":350.0,"image_url":"assets/img/product/237965_3t9e6m.png","id":237965},{"name":"KÖRİ SOSLU MAKARNA","description":"Körili Mantarlı Sos, 90 gr. Izgara Tavuk Parçaları, Parmesan Peyniri.","price":400.0,"image_url":"assets/img/product/237967_VMLf7A.png","id":237967}]},{"name":"PİZZALAR","order":16,"products":[{"name":"KİPER PİZZA","description":"75 gr. Dana Eti Parçaları, Özel Pizza Sos, Mozeralla Peyniri, Siyah Zeytin Dilimleri, Renkli Biberler, Jalapeno Biber ve Mantar.","price":550.0,"image_url":"assets/img/product/237971_2O0SyL.png","id":237971},{"name":"PİZZA MİKS","description":"Salam, Sosis, Sucuk, Özel Pizza Sos, Mozeralla Peyniri, Siyah Zeytin Dilimleri, Renkli Biberler ve Mantar.","price":500.0,"image_url":"assets/img/product/237972_UbsAlt.png","id":237972},{"name":"PİZZA MARGHERİTA","description":"Parmesan Peyniri, Fesleğen Sos, Domates, Özel Pizza Sos, Mozeralla Peyniri ve Roka.","price":375.0,"image_url":"assets/img/product/237974_sXKXJh.png","id":237974},{"name":"PİZZA SUCUKLU","description":"Sucuk, Beyaz Peynir, Siyah Zeytin Dilimleri, Özel Pizza Sos, Mozeralla Peyniri ve Renkli Biberler.","price":475.0,"image_url":"assets/img/product/237975_yDnmCu.png","id":237975},{"name":"YALANCI PİZZA","description":"Özel İnce Hamur, Salam, Sosis, Sucuk, Siyah Zeytin Dilimleri, Renkli Biberler, Özel Pizza Sos, Mozeralla Peyniri, Mantar ve Mevsim Yeşillikleri Salata.","price":475.0,"image_url":"assets/img/product/237976_nEtndu.png","id":237976}]},{"name":"PİZZANIZ İÇİN EKSTRA NE İSTERSİNİZ?","order":17,"products":[{"name":"Sucuk","description":"45 gr.","price":155.0,"image_url":"","id":268065},{"name":"Salam","description":"25 gr.","price":75.0,"image_url":"","id":268066},{"name":"Sosis","description":"45 gr.","price":120.0,"image_url":"","id":268067},{"name":"Kavurma","description":"50 gr.","price":250.0,"image_url":"","id":268068},{"name":"Mantar","description":"30 gr.","price":55.0,"image_url":"","id":268069},{"name":"Mısır","description":"20 gr.","price":55.0,"image_url":"","id":268070},{"name":"Siyah Zeytin Dilimli","description":"20 gr.","price":55.0,"image_url":"","id":268071}]},{"name":"BEYAZ ETLER","order":18,"products":[{"name":"MANTAR SOSLU TAVUK GRATEN","description":"180 gr. Kremalı Demi Glace Sos ile Harmanlanmış Tavuk Bonfile Parçaları, Soya Sosu,Kaşar Peyniri, Renkli Biberler, Karamelize Soğan ve Mantar. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":475.0,"image_url":"assets/img/product/237978_Fy0a9c.png","id":237978},{"name":"ÇİN USULÜ PİLİÇ","description":"180 gr. Kremalı Soya Sosu ile Harmanlanmış Tavuk Bonfile Parçaları, Renkli Biberler, Edamame ve Susam Yağı. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":450.0,"image_url":"assets/img/product/237979_gpDVNt.png","id":237979},{"name":"DİYET PİLİÇ BONFİLE","description":"240 gr. Izgara Tavuk Bonfile, Sotelenmiş Mevsim Sebzeleri, Izgara Domates, Biber ve Özel Yoğurt Sos.","price":400.0,"image_url":"assets/img/product/237980_AzZ6jU.png","id":237980},{"name":"KÖRİ SOSLU TAVUK","description":"180 gr. Kremalı Köri Sos ile Harmanlanmış Tavuk Bonfile Parçaları, Karamelize Soğan, Renkli Biberler ve Mantar. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":475.0,"image_url":"assets/img/product/237981_5RcBfL.png","id":237981},{"name":"TATLI EKŞİ SOSLU TAVUK","description":"180 gr. Kremalı Tatlı-Ekşi Sos ile Harmanlanmış Tavuk Bonfile Parçaları, Karamelize Soğan, Renkli Biberler ve Mantar. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":450.0,"image_url":"assets/img/product/237983_AtSBuy.png","id":237983},{"name":"BARBEKÜ SOSLU TAVUK","description":"180 gr. Kremalı Barbekü Sos ile Harmanlanmış Tavuk Bonfile Parçaları, Karamelize Soğan, Renkli Biberler ve Mantar. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":450.0,"image_url":"assets/img/product/237984_AdQNPN.png","id":237984},{"name":"TAVUK SNİTZEL","description":"280 gr. Pane ile Harmanlanmış Tavuk Bonfile (Patates Tava ve Mevsim Salata ile Servis Edilmektedir.)","price":450.0,"image_url":"assets/img/product/414253_kwEpP9.png","id":414253},{"name":"BEĞENDİLİ TAVUK","description":"Tereyağ, Kaşar Peynir, Patlıcan ile Hazırlanmış Beğendi Üzerinde Servis Edilen 240 gr. Tavuk ve Mantar. (Patates Tava ve Mevsim Salata ile Servis Edilmektedir.)","price":475.0,"image_url":"assets/img/product/414254_Nlp3dA.png","id":414254}]},{"name":"KIRMIZI ETLER","order":19,"products":[{"name":"ÇÖKERTME KEBABI","description":"Çökertme Sosu ve Tereyağ ile Harmanlanmış Pide, Talaş Patates, 175 gr. Sotelenmiş Dana Eti Parçaları, Sarımsaklı Yoğurt ve Izgara Domates, Biber.","price":900.0,"image_url":"assets/img/product/237989_rENy6Z.png","id":237989},{"name":"IZGARA KÖFTE","description":"200 gr. Ekmek Üzerinde Izgara Köfte, Izgara Domates, Biber ve Acı Sos. (Kaşık Patates Tava, Pirinç Pilavı ve Mevsim Salata ile servis edilmektedir.)","price":700.0,"image_url":"assets/img/product/237990_ZYrzp4.png","id":237990}]},{"name":"MEŞRUBATLAR","order":20,"products":[{"name":"Coca Cola","description":"","price":105.0,"image_url":"assets/img/product/237991_elXl3k.png","id":237991},{"name":"Coca Cola Zero","description":"","price":105.0,"image_url":"assets/img/product/237992_sEOSzs.png","id":237992},{"name":"Fanta","description":"","price":105.0,"image_url":"assets/img/product/237993_JuPwca.png","id":237993},{"name":"Sprite","description":"","price":105.0,"image_url":"assets/img/product/237994_C6xTMG.png","id":237994},{"name":"Cappy Meyve Suyu Çeşitleri","description":"","price":100.0,"image_url":"assets/img/product/237995_8mYRUO.png","id":237995},{"name":"Ice Tea Çeşitleri","description":"","price":100.0,"image_url":"assets/img/product/237996_AWP6B2.png","id":237996},{"name":"Ayran","description":"","price":75.0,"image_url":"assets/img/product/237997_YoUFVu.png","id":237997},{"name":"Meyveli Soda","description":"","price":60.0,"image_url":"assets/img/product/237998_lKvn6C.png","id":237998},{"name":"Soda","description":"","price":60.0,"image_url":"assets/img/product/237999_G0zXFo.png","id":237999},{"name":"Su","description":"","price":30.0,"image_url":"assets/img/product/238000_FxYsZj.png","id":238000}]},{"name":"TAZE SIKILMIŞ MEYVE SULARI","order":21,"products":[{"name":"Portakal Suyu","description":"","price":150.0,"image_url":"assets/img/product/238001_unneOC.png","id":238001},{"name":"Ev Yapımı Limonata","description":"","price":140.0,"image_url":"assets/img/product/238002_Cxmr0o.png","id":238002}]},{"name":"ÇAY","order":22,"products":[{"name":"İnce Belli Bardak","description":"","price":50.0,"image_url":"assets/img/product/238003_JJ4FwP.png","id":238003},{"name":"Fincan","description":"","price":65.0,"image_url":"assets/img/product/238004_bCV2Y6.png","id":238004}]},{"name":"TÜRK KAHVELERİ","order":23,"products":[{"name":"Geleneksel Türk Kahvesi","description":"","price":120.0,"image_url":"assets/img/product/238005_R8u0U7.png","id":238005},{"name":"Sütlü Türk Kahvesi","description":"","price":140.0,"image_url":"assets/img/product/238006_zbLyFW.png","id":238006}]},{"name":"SICAK KAHVELER","order":24,"products":[{"name":"Filtre Kahve","description":"","price":175.0,"image_url":"assets/img/product/238007_uZgODr.png","id":238007},{"name":"Sütlü Filtre Kahve","description":"","price":200.0,"image_url":"assets/img/product/238008_S3ObVJ.png","id":238008},{"name":"Espresso","description":"","price":0.0,"image_url":"assets/img/product/238009_2zu9JA.png","id":238009},{"name":"Espresso Macchiato","description":"","price":0.0,"image_url":"assets/img/product/238010_p37FZ7.png","id":238010},{"name":"Latte","description":"","price":175.0,"image_url":"assets/img/product/238011_QdvVkT.png","id":238011},{"name":"Latte Macchiato","description":"","price":185.0,"image_url":"assets/img/product/238012_68LYDB.png","id":238012},{"name":"Caramel Macchiato","description":"","price":185.0,"image_url":"assets/img/product/238013_99OzGD.png","id":238013},{"name":"Capuccino","description":"","price":175.0,"image_url":"assets/img/product/238014_Ng1wRe.png","id":238014},{"name":"Mocha","description":"","price":175.0,"image_url":"assets/img/product/238015_3anyoG.png","id":238015},{"name":"White Chocolate Mocha","description":"","price":175.0,"image_url":"assets/img/product/238016_HRJtdT.png","id":238016},{"name":"Americano","description":"","price":165.0,"image_url":"assets/img/product/238017_VLAEu3.png","id":238017},{"name":"Nescafe Sade","description":"","price":150.0,"image_url":"assets/img/product/238018_pvGKaf.png","id":238018},{"name":"Nescafe Sütlü","description":"","price":175.0,"image_url":"assets/img/product/238019_jMPzax.png","id":238019},{"name":"Sıcak Çikolata","description":"","price":185.0,"image_url":"assets/img/product/238020_AWpcH1.png","id":238020},{"name":"Fincanda Süt","description":"","price":120.0,"image_url":"assets/img/product/238021_nsS9lT.png","id":238021}]},{"name":"SOĞUK KAHVELER","order":25,"products":[{"name":"Ice Latte","description":"","price":175.0,"image_url":"assets/img/product/238022_PLN6aD.png","id":238022},{"name":"Ice Mocha","description":"","price":175.0,"image_url":"assets/img/product/238023_b5kTym.png","id":238023},{"name":"Ice White Chocolate Mocha","description":"","price":175.0,"image_url":"assets/img/product/238024_s3VLXM.png","id":238024},{"name":"Ice Cappucino","description":"","price":175.0,"image_url":"assets/img/product/238025_LO23Kw.png","id":238025},{"name":"Ice Americano","description":"","price":175.0,"image_url":"assets/img/product/238026_36y1o2.png","id":238026}]},{"name":"BİTKİ ÇAYLARI","order":26,"products":[{"name":"Nane Limon","description":"","price":175.0,"image_url":"assets/img/product/238027_BXkGQQ.png","id":238027},{"name":"Yeşil Çay","description":"","price":175.0,"image_url":"assets/img/product/238028_nXo9rW.png","id":238028},{"name":"Adaçayı","description":"","price":175.0,"image_url":"assets/img/product/238029_hH7WmQ.png","id":238029},{"name":"Papatya Çayı","description":"","price":175.0,"image_url":"assets/img/product/238030_o5XuKt.png","id":238030},{"name":"Çiçek Ihlamur","description":"","price":175.0,"image_url":"assets/img/product/238031_Oa6Or0.png","id":238031},{"name":"Kış Çayı","description":"","price":175.0,"image_url":"assets/img/product/238032_s5NCE7.png","id":238032},{"name":"Elma Tarçın Çayı","description":"","price":175.0,"image_url":"assets/img/product/238033_QZmSaf.png","id":238033},{"name":"Meyve Karnavalı","description":"","price":175.0,"image_url":"assets/img/product/238034_sFQ4o1.png","id":238034}]},{"name":"FROZENLAR","order":27,"products":[{"name":"Frozen Çeşitleri","description":"(Çilek, Kivi, Muz, Kavun, Nane&Limon, Karpuz, Karadut)","price":200.0,"image_url":"assets/img/product/238035_emswu4.png","id":238035},{"name":"Karışık Frozen","description":"","price":200.0,"image_url":"assets/img/product/238036_1zsabL.png","id":238036}]},{"name":"MILKSHAKE’LER","order":28,"products":[{"name":"Milkshake Çeşitleri","description":"(Çilek, Çikolata, Karamel, Vanilya, Muz)","price":200.0,"image_url":"assets/img/product/238037_gVbALu.png","id":238037}]},{"name":"FRAPPELER","order":29,"products":[{"name":"Frappe","description":"","price":200.0,"image_url":"assets/img/product/238038_OQvwg3.png","id":238038},{"name":"Aromalı Frappeler","description":"(Çikolata, Karamel, Vanilya)","price":200.0,"image_url":"assets/img/product/238039_Zsg1Or.png","id":238039}]},{"name":"PASTALAR ve SÜTLÜ TATLILAR","order":30,"products":[{"name":"Milföy, Muzlu Rulo, Tinton, Ballı Adet Pasta Çeşitleri","description":"","price":250.0,"image_url":"assets/img/product/238040_wPOeAf.png","id":238040},{"name":"Kiper Klasik Adet Pasta Çeşitleri","description":"","price":280.0,"image_url":"assets/img/product/238041_2kQujR.png","id":238041},{"name":"Antep Fıstıklı Karon","description":"","price":320.0,"image_url":"assets/img/product/238042_hKEcLJ.png","id":238042},{"name":"San Sebastian Cheescake","description":"","price":320.0,"image_url":"assets/img/product/238043_MstYrz.png","id":238043},{"name":"Şeker Hamur Figürlü Pasta","description":"","price":400.0,"image_url":"assets/img/product/238045_z2XowF.png","id":238045},{"name":"Fırın Sütlaç-Kazandibi–Tavuk Göğsü -Keşkül","description":"","price":250.0,"image_url":"assets/img/product/238046_eXC8o5.png","id":238046},{"name":"Supangle- Profiterol","description":"","price":290.0,"image_url":"assets/img/product/238047_CEhVmY.png","id":238047},{"name":"Magnolya çeşitleri","description":"","price":290.0,"image_url":"assets/img/product/238048_RfH0fl.png","id":238048},{"name":"Special Muhallebi Çeşitleri","description":"","price":290.0,"image_url":"assets/img/product/238049_5s3hMe.png","id":238049},{"name":"Aşure","description":"","price":290.0,"image_url":"assets/img/product/238050_GEvFVz.png","id":238050},{"name":"Tramisu","description":"","price":290.0,"image_url":"assets/img/product/238051_WoW647.png","id":238051},{"name":"Minik Ekler Çeşitleri (5 Adet)","description":"","price":175.0,"image_url":"assets/img/product/238052_DACzTU.png","id":238052},{"name":"Büyük Ekler Çeşitleri","description":"","price":250.0,"image_url":"assets/img/product/238053_3cCjud.png","id":238053},{"name":"Petifür Çeşitleri (4 Adet)","description":"","price":230.0,"image_url":"assets/img/product/238054_wvRYD8.png","id":238054},{"name":"İlave Dondurma","description":"","price":125.0,"image_url":"assets/img/product/238055_PTNptU.png","id":238055}]},{"name":"POĞAÇA ve BÖREKLER","order":31,"products":[{"name":"Simit","description":"","price":25.0,"image_url":"assets/img/product/238056_A9BfNw.png","id":238056},{"name":"Sade Açma","description":"","price":30.0,"image_url":"assets/img/product/238057_bUlsBJ.png","id":238057},{"name":"İçli Açma Çeşitleri","description":"","price":35.0,"image_url":"assets/img/product/238058_5o8RPo.png","id":238058},{"name":"Adet Pizza Çeşitleri","description":"","price":75.0,"image_url":"assets/img/product/238059_WCUX3J.png","id":238059},{"name":"Sakallı Çeşitleri (Adet)","description":"","price":35.0,"image_url":"assets/img/product/238060_Yd8Zsw.png","id":238060},{"name":"Su böreği Pors.","description":"","price":210.0,"image_url":"assets/img/product/238061_H7BEuJ.png","id":238061},{"name":"Kıymalı Kol Böreği Pors.","description":"","price":220.0,"image_url":"assets/img/product/238062_sKSHvx.png","id":238062},{"name":"Peynirli Kol Böreği Pors.","description":"","price":200.0,"image_url":"assets/img/product/238063_L3tmzw.png","id":238063},{"name":"Patatesli Kol Böreği Pors.","description":"","price":200.0,"image_url":"assets/img/product/238064_F47bmG.png","id":238064},{"name":"Gül Böreği Kıymalı","description":"","price":65.0,"image_url":"assets/img/product/238065_v5fhCa.png","id":238065},{"name":"Gül Böreği Peynirli-Patatesli","description":"","price":65.0,"image_url":"assets/img/product/238066_AxPM6Z.png","id":238066},{"name":"Samsa Böreği","description":"","price":80.0,"image_url":"assets/img/product/238067_UnYxZY.png","id":238067},{"name":"Tatlı Kuru Pasta Tabağı (8 adet)","description":"","price":240.0,"image_url":"assets/img/product/238068_l77uE3.png","id":238068},{"name":"Tahinli Çörek","description":"","price":150.0,"image_url":"assets/img/product/238069_MMMBSm.png","id":238069},{"name":"İçli Poğaça Çeşitleri","description":"","price":30.0,"image_url":"assets/img/product/268492_jMbelZ.png","id":268492},{"name":"Tuzlu Kuru Pasta (8 adet)","description":"","price":210.0,"image_url":"assets/img/product/268493_OoGwv7.png","id":268493},{"name":"SADE POĞAÇA","description":"","price":30.0,"image_url":"assets/img/product/350177_8ACpOH.png","id":350177}]},{"name":"ŞERBETLİ TATLILAR","order":32,"products":[{"name":"Cimcik (Adet)","description":"","price":126.0,"image_url":"assets/img/product/230487_5t8Vxc.png","id":230487},{"name":"Cimcik Porsiyon (3 Adet)","description":"","price":377.5,"image_url":"assets/img/product/230488_ZmTxDh.png","id":230488},{"name":"Ev Baklavası (Adet)","description":"","price":64.5,"image_url":"assets/img/product/230489_b6GtyL.png","id":230489},{"name":"Ev Baklavası Porsiyon (4 Adet)","description":"","price":257.0,"image_url":"assets/img/product/230490_UYKPNe.png","id":230490},{"name":"Cevizli Baklava (Adet)","description":"","price":69.5,"image_url":"assets/img/product/230491_n8flvZ.png","id":230491},{"name":"Cevizli Baklava Porsiyon (4 Adet)","description":"","price":278.0,"image_url":"assets/img/product/230492_46uTtN.png","id":230492},{"name":"Fıstıklı Baklava (Adet)","description":"","price":110.5,"image_url":"assets/img/product/230493_OMyVRs.png","id":230493},{"name":"Fıstıklı Baklava Porsiyon (3 Adet)","description":"","price":332.0,"image_url":"assets/img/product/230494_PMTmFv.png","id":230494},{"name":"Fıstıklı Şöbiyet (Adet)","description":"","price":159.5,"image_url":"assets/img/product/230499_doQELK.png","id":230499},{"name":"Fıstıklı Şöbiyet Porsiyon (3 Adet)","description":"","price":478.5,"image_url":"assets/img/product/230500_cZbtxV.png","id":230500},{"name":"Fıstık Sarma (Adet)","description":"","price":75.5,"image_url":"assets/img/product/230503_bKemeo.png","id":230503},{"name":"Fıstık Sarma Porsiyon (4 Adet)","description":"","price":302.5,"image_url":"assets/img/product/230504_W5sxe4.png","id":230504},{"name":"Saray Sarma (Adet)","description":"","price":50.0,"image_url":"assets/img/product/230507_aMotjA.png","id":230507},{"name":"Saray Sarma Porsiyon (6 Adet)","description":"","price":299.0,"image_url":"assets/img/product/230508_ewomfS.png","id":230508},{"name":"Soğuk Baklava (Adet)","description":"","price":94.0,"image_url":"assets/img/product/230511_r7HmVH.png","id":230511},{"name":"Soğuk Baklava Porsiyon (4 Adet)","description":"","price":376.0,"image_url":"assets/img/product/230512_j7gM2A.png","id":230512},{"name":"Şekerpare (Adet)","description":"","price":68.5,"image_url":"assets/img/product/230513_W62XNs.png","id":230513},{"name":"Şekerpare Porsiyon (3 Adet)","description":"","price":205.0,"image_url":"assets/img/product/230514_XKYBZx.png","id":230514},{"name":"Fıstıklı Kadayıf (Adet)","description":"","price":287.5,"image_url":"assets/img/product/230515_3DYBxx.png","id":230515},{"name":"İlave Dondurma","description":"","price":125.0,"image_url":"assets/img/product/230517_D3XQym.png","id":230517}]}]
+// ===== RENDER =====
+const container = document.getElementById('menuContent');
+const navInner = document.getElementById('catNavInner');
+
+function renderMenu(data) {
+  let html = '';
+  data.forEach((cat, ci) => {
+    const catId = 'cat-' + ci;
+    html += `<section class="cat-section" id="${catId}" data-reveal>
+      <div class="cat-heading">
+        <h2>${cat.name}</h2>
+        <div class="line"></div>
+      </div>
+      <div class="prod-grid">`;
+    
+    cat.products.forEach(p => {
+      const imgSrc = p.image_url ? `https://qrapi.kirazsoft.com/${p.image_url}` : '';
+      const hasImg = !!p.image_url;
+      const hasDesc = !!p.description;
+      const showPrice = p.price > 0;
+      
+      html += `<div class="prod-card">
+        <div class="img-wrap">`;
+      if (hasImg) {
+        html += `<img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=img-placeholder>✦</div>'">`;
+      } else {
+        html += `<div class="img-placeholder">✦</div>`;
+      }
+      html += `</div>
+        <div class="info">
+          <div class="name">${p.name}</div>`;
+      if (hasDesc) {
+        html += `<div class="desc">${p.description}</div>`;
+      }
+      html += `<div class="price-row">`;
+      if (showPrice) {
+        html += `<span class="price">₺${p.price.toFixed(2)}</span>`;
+      } else {
+        html += `<span class="price-zero">Fiyat bilgisi için sorunuz</span>`;
+      }
+      html += `</div></div></div>`;
+    });
+    
+    html += `</div></section>`;
+  });
+  container.innerHTML = html;
+
+  // Category nav buttons
+  data.forEach((cat, ci) => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-nav-btn';
+    btn.textContent = cat.name;
+    btn.dataset.cat = 'cat-' + ci;
+    btn.addEventListener('click', () => {
+      document.getElementById('cat-' + ci).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    navInner.appendChild(btn);
+  });
+}
+
+renderMenu(MENU_DATA);
+
+// ===== INTERSECTION OBSERVER for scroll reveal =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+// ===== ACTIVE CATEGORY NAV HIGHLIGHT =====
+const catSections = document.querySelectorAll('.cat-section');
+const navBtns = document.querySelectorAll('.cat-nav-btn');
+
+const catObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.cat === id);
+      });
+      // Scroll nav button into view
+      const activeBtn = document.querySelector(`.cat-nav-btn[data-cat="${id}"]`);
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-80px 0px 0px 0px' });
+
+catSections.forEach(s => catObserver.observe(s));
+
+// ===== IMAGE ERROR FIX (re-run for already-loaded images) =====
+document.querySelectorAll('.prod-card .img-wrap img').forEach(img => {
+  if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0)) {
+    img.parentElement.innerHTML = '<div class=img-placeholder>✦</div>';
+  }
+});
+</script>
+</body>
+</html>
