@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kiper Pastanesi — 1971'den beri Büyükçekmece'de doğal ürünlerle yapılan dayanılmaz lezzetler. Pasta, baklava, börek ve daha fazlası.">
+  <meta name="theme-color" content="#1A0E09">
+  <meta name="format-detection" content="telephone=yes">
+  <title>Kiper Pastanesi — 1971'den Beri Büyükçekmece'nin Lezzeti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --color-bg:#FFFAF5;
+  --color-bg-alt:#F5EDE4;
+  --color-bg-warm:#FDF0E0;
+  --color-bg-dark:#1A0E09;
+  --color-text:#1A0E09;
+  --color-text-light:#6B4C3B;
+  --color-text-on-dark:#F0E6D6;
+  --color-primary:#7A3B10;
+  --color-primary-light:#B87A4E;
+  --color-accent:#C49B5E;
+  --color-accent-light:#E0C9A0;
+  --color-accent-dim:rgba(196,155,94,0.15);
+  --color-gold:#A67C2E;
+  --color-cream:#FFF8F0;
+  --color-warm:#FDF0E0;
+  --font-heading:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --shadow-sm:0 1px 3px rgba(26,14,9,0.06);
+  --shadow-md:0 4px 24px rgba(26,14,9,0.08);
+  --shadow-lg:0 8px 48px rgba(26,14,9,0.12);
+  --shadow-glow:0 0 30px rgba(196,155,94,0.2);
+  --radius-sm:8px;
+  --radius-md:16px;
+  --radius-lg:28px;
+  --max-w:1200px;
+  --nav-h:64px;
+  --transition-smooth:cubic-bezier(0.25,0.46,0.45,0.94)
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);color:var(--color-text);background:var(--color-bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ===== SCROLL PROGRESS ===== */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:1001;background:transparent}
+.scroll-progress-bar{height:100%;background:linear-gradient(90deg,var(--color-accent),var(--color-gold));width:0%;transition:width 50ms linear;border-radius:0 2px 2px 0}
+
+/* ===== SCROLL REVEAL ===== */
+[data-reveal]{opacity:0;transform:translateY(50px);transition:opacity .9s var(--transition-smooth),transform .9s var(--transition-smooth)}
+[data-reveal].visible{opacity:1;transform:translateY(0)}
+[data-reveal=left]{opacity:0;transform:translateX(-60px);transition:opacity .8s ease-out,transform .8s ease-out}
+[data-reveal=left].visible{opacity:1;transform:translateX(0)}
+[data-reveal=right]{opacity:0;transform:translateX(60px);transition:opacity .8s ease-out,transform .8s ease-out}
+[data-reveal=right].visible{opacity:1;transform:translateX(0)}
+[data-reveal=scale]{opacity:0;transform:scale(.9);transition:opacity .9s var(--transition-smooth),transform .9s var(--transition-smooth)}
+[data-reveal=scale].visible{opacity:1;transform:scale(1)}
+@media(prefers-reduced-motion:reduce){[data-reveal],[data-reveal=left],[data-reveal=right],[data-reveal=scale]{opacity:1;transform:none;transition:none}}
+
+.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.stagger.visible>*{opacity:1;transform:translateY(0)}
+.stagger.visible>:nth-child(1){transition-delay:.05s}
+.stagger.visible>:nth-child(2){transition-delay:.12s}
+.stagger.visible>:nth-child(3){transition-delay:.19s}
+.stagger.visible>:nth-child(4){transition-delay:.26s}
+.stagger.visible>:nth-child(5){transition-delay:.33s}
+.stagger.visible>:nth-child(6){transition-delay:.40s}
+.stagger.visible>:nth-child(7){transition-delay:.47s}
+.stagger.visible>:nth-child(8){transition-delay:.54s}
+.stagger.visible>:nth-child(9){transition-delay:.61s}
+.stagger.visible>:nth-child(10){transition-delay:.68s}
+.stagger.visible>:nth-child(11){transition-delay:.75s}
+.stagger.visible>:nth-child(12){transition-delay:.82s}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,14,9,0.92);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid rgba(196,155,94,0.1);transition:transform .35s ease}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:var(--nav-h)}
+.nav-logo{font-family:var(--font-heading);font-size:1.35rem;font-weight:700;color:var(--color-accent);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.nav-logo svg{width:22px;height:22px}
+.nav-logo span{color:var(--color-primary-light)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:.82rem;font-weight:500;color:rgba(240,230,214,0.75);padding:8px 14px;border-radius:var(--radius-sm);transition:color .25s,background .25s;letter-spacing:.03em;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1.5px;background:var(--color-accent);transform:scaleX(0);transition:transform .3s ease}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--color-accent);background:rgba(196,155,94,0.08)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--color-accent)!important;color:var(--color-bg-dark)!important;padding:8px 20px!important;border-radius:50px!important;font-weight:600!important;letter-spacing:.02em!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--color-gold)!important;transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:none;color:var(--color-accent);cursor:pointer;padding:4px;width:36px;height:36px;position:relative}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--color-accent);border-radius:2px;position:absolute;left:7px;transition:all .3s ease}
+.nav-toggle span:nth-child(1){top:11px}
+.nav-toggle span:nth-child(2){top:17px}
+.nav-toggle span:nth-child(3){top:23px}
+.nav-toggle.active span:nth-child(1){top:17px;transform:rotate(45deg)}
+.nav-toggle.active span:nth-child(2){opacity:0;transform:translateX(-8px)}
+.nav-toggle.active span:nth-child(3){top:17px;transform:rotate(-45deg)}
+@media(max-width:768px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(26,14,9,0.98);backdrop-filter:blur(20px);flex-direction:column;padding:20px 24px;gap:4px;transform:translateY(-110%);opacity:0;transition:transform .4s ease,opacity .4s ease;pointer-events:none;border-bottom:1px solid rgba(196,155,94,0.12)}
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:all}
+  .nav-links a{width:100%;padding:14px 16px;font-size:.95rem}
+  .nav-links a::after{display:none}
+  .nav-cta{text-align:center;margin-top:4px}
+}
+
+/* ===== HERO ===== */
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;justify-content:center;background:var(--color-bg-dark);overflow:hidden;padding:100px 20px 60px}
+.hero-bg{position:absolute;inset:0;will-change:transform}
+.hero-bg-inner{position:absolute;inset:-20%;background:radial-gradient(ellipse at 25% 35%,rgba(196,155,94,0.12) 0%,transparent 55%),radial-gradient(ellipse at 75% 65%,rgba(122,59,16,0.18) 0%,transparent 50%),radial-gradient(ellipse at 50% 0%,rgba(196,155,94,0.06) 0%,transparent 40%);transition:transform .1s ease-out}
+.hero-pattern{position:absolute;inset:0;opacity:0.03;background-image:repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(196,155,94,0.4) 24px,rgba(196,155,94,0.4) 25px),repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(196,155,94,0.4) 24px,rgba(196,155,94,0.4) 25px);background-size:50px 50px}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(196,155,94,0.06),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:heroPulse 6s ease-in-out infinite alternate}
+@keyframes heroPulse{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0.6}}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:.8rem;font-style:italic;color:var(--color-accent);letter-spacing:.18em;border:1px solid rgba(196,155,94,0.25);padding:6px 20px;border-radius:50px;margin-bottom:32px;opacity:0;animation:fadeSlide .8s ease .2s forwards}
+.hero-badge svg{width:14px;height:14px;opacity:0.7}
+.hero h1{font-family:var(--font-heading);font-size:clamp(2.6rem,7.5vw,5.2rem);font-weight:700;line-height:1.05;color:var(--color-cream);margin-bottom:18px;opacity:0;animation:fadeSlide .8s ease .4s forwards}
+.hero h1 em{font-style:italic;color:var(--color-accent);display:block}
+.hero p{font-size:clamp(.95rem,1.8vw,1.15rem);color:rgba(240,230,214,0.65);max-width:540px;margin:0 auto 40px;line-height:1.8;opacity:0;animation:fadeSlide .8s ease .6s forwards}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeSlide .8s ease .8s forwards}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:50px;font-family:var(--font-body);font-size:.9rem;font-weight:600;border:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease;text-decoration:none;letter-spacing:.01em}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+.btn-primary{background:var(--color-accent);color:var(--color-bg-dark)}
+.btn-primary:hover{box-shadow:var(--shadow-glow)}
+.btn-secondary{background:transparent;color:var(--color-cream);border:1px solid rgba(196,155,94,0.35)}
+.btn-secondary:hover{border-color:var(--color-accent);background:rgba(196,155,94,0.08)}
+.btn-whatsapp{background:#25D366;color:#fff}
+.btn-whatsapp:hover{box-shadow:0 0 28px rgba(37,211,102,0.35)}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(240,230,214,0.35);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;animation:scrollBob 2.5s ease-in-out infinite}
+.hero-scroll svg{width:16px;height:24px;opacity:0.5}
+@keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+/* ===== FLOATING DECORATIONS ===== */
+.floating-dec{position:absolute;pointer-events:none;z-index:1;opacity:0.04}
+.floating-dec svg{width:100%;height:100%}
+@media(max-width:768px){.floating-dec{display:none}}
+
+/* ===== SECTIONS COMMON ===== */
+section{padding:100px 20px}
+.section-label{font-family:var(--font-heading);font-size:.8rem;font-style:italic;color:var(--color-primary-light);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;justify-content:center}
+.section-label::before,.section-label::after{content:'';width:24px;height:1px;background:var(--color-accent-light);opacity:0.5}
+.section-title{font-family:var(--font-heading);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.1;color:var(--color-bg-dark);margin-bottom:16px}
+.section-subtitle{color:var(--color-text-light);font-size:1rem;max-width:580px;line-height:1.7}
+.section-center{text-align:center}
+.section-center .section-subtitle{margin:0 auto}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+
+/* ===== DECORATIVE DIVIDER ===== */
+.divider{text-align:center;padding:0 20px;position:relative;height:40px;display:flex;align-items:center;justify-content:center}
+.divider-inner{display:flex;align-items:center;gap:16px}
+.divider-inner::before,.divider-inner::after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--color-accent-light))}
+.divider-inner::after{background:linear-gradient(90deg,var(--color-accent-light),transparent)}
+.divider-icon{color:var(--color-accent);font-size:.7rem;opacity:0.5;font-family:serif}
+
+/* ===== ABOUT ===== */
+.about{background:var(--color-bg);position:relative;overflow:hidden}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-visual{position:relative}
+.about-image-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;background:var(--color-bg-alt);display:flex;align-items:center;justify-content:center}
+.about-image-wrap svg.about-illustration{width:70%;height:70%;opacity:0.2;color:var(--color-primary)}
+.about-image-wrap .about-badge{position:absolute;bottom:24px;left:24px;background:var(--color-accent);color:var(--color-bg-dark);font-family:var(--font-heading);font-size:1.2rem;font-weight:700;padding:10px 22px;border-radius:var(--radius-sm);box-shadow:var(--shadow-md)}
+.about-image-wrap .about-badge small{display:block;font-family:var(--font-body);font-size:.65rem;font-weight:400;opacity:0.7;margin-top:2px}
+.about-accent{position:absolute;top:-12px;right:-12px;width:100px;height:100px;border:2px solid var(--color-accent-light);border-radius:var(--radius-lg);z-index:-1;opacity:0.4}
+@media(max-width:768px){.about-accent{display:none}}
+.about-text .lead{font-size:1.1rem;color:var(--color-text);line-height:1.8;margin-bottom:20px;font-weight:500}
+.about-text p{color:var(--color-text-light);line-height:1.8;margin-bottom:14px;font-size:.95rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;padding-top:36px;border-top:1px solid var(--color-accent-light)}
+.about-stat{text-align:center;position:relative}
+.about-stat+.about-stat::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;background:var(--color-accent-light);opacity:0.4}
+.about-stat .num{font-family:var(--font-heading);font-size:2rem;font-weight:700;color:var(--color-primary);line-height:1;display:block}
+.about-stat .lbl{font-size:.78rem;color:var(--color-text-light);margin-top:4px;font-weight:400}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:44px}.about-stats{gap:0}.about-stat .num{font-size:1.6rem}}
+
+/* ===== MENU ===== */
+.menu{background:var(--color-bg-alt);position:relative}
+.menu-bg-pat{position:absolute;inset:0;opacity:0.02;background:radial-gradient(circle at 20% 50%,var(--color-accent) 0%,transparent 50%),radial-gradient(circle at 80% 50%,var(--color-primary) 0%,transparent 50%)}
+.menu-tabs{display:flex;gap:6px;margin-top:40px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2}
+.menu-tab{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;border:1px solid rgba(196,155,94,0.2);background:transparent;font-family:var(--font-body);font-size:.82rem;font-weight:500;color:var(--color-text-light);cursor:pointer;transition:all .3s ease}
+.menu-tab svg{width:16px;height:16px;opacity:0.6;transition:opacity .3s}
+.menu-tab:hover{border-color:var(--color-accent);color:var(--color-primary)}
+.menu-tab:hover svg{opacity:1}
+.menu-tab.active{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-bg-dark);font-weight:600}
+.menu-tab.active svg{opacity:1}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:36px}
+.menu-item{background:var(--color-bg);border-radius:var(--radius-md);padding:18px 22px;border:1px solid rgba(196,155,94,0.08);transition:all .35s ease;position:relative;overflow:hidden}
+.menu-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--color-accent),transparent);opacity:0;transition:opacity .35s ease}
+.menu-item:hover{border-color:var(--color-accent-light);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.menu-item:hover::before{opacity:1}
+.menu-item .name{font-weight:600;font-size:.92rem;color:var(--color-text);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.menu-item .name .price-tag{font-weight:600;color:var(--color-primary);font-size:.85rem;white-space:nowrap}
+.menu-item .desc{font-size:.8rem;color:var(--color-text-light);margin-top:5px;line-height:1.5}
+.menu-section{display:none}
+.menu-section.active{display:block}
+.menu-cta-wrap{margin-top:40px;position:relative;z-index:2}
+@media(max-width:480px){.menu-grid{grid-template-columns:1fr}}
+
+/* ===== DESIGN CAKES ===== */
+.cakes{background:var(--color-bg);position:relative}
+.cakes::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--color-accent),transparent)}
+.cakes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.cake-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1;background:var(--color-bg-alt);display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:220px;transition:transform .5s ease,box-shadow .5s ease;perspective:800px}
+.cake-card:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
+.cake-card-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .5s ease;position:relative}
+.cake-card:hover .cake-card-inner{transform:scale(1.05)}
+.cake-card svg.cake-icon{width:45%;height:45%;max-width:100px;max-height:100px;opacity:0.15;color:var(--color-primary);transition:opacity .4s ease,transform .4s ease}
+.cake-card:hover svg.cake-icon{opacity:0.25;transform:scale(1.1) rotate(-5deg)}
+.cake-card .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,14,9,0.85) 0%,rgba(26,14,9,0.4) 40%,transparent 60%);display:flex;align-items:flex-end;padding:24px;opacity:0;transition:opacity .4s ease}
+.cake-card:hover .overlay{opacity:1}
+.cake-card .overlay span{color:var(--color-cream);font-weight:600;font-size:.95rem;letter-spacing:.02em}
+.cake-card .label{position:absolute;bottom:20px;left:20px;right:20px;text-align:center;color:var(--color-text);font-weight:600;font-size:.88rem;transition:opacity .3s ease}
+.cake-card:hover .label{opacity:0}
+@media(max-width:768px){.cakes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cakes-grid{grid-template-columns:1fr}}
+
+/* ===== GALLERY ===== */
+.gallery{background:var(--color-bg-alt);position:relative}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.gallery-item{aspect-ratio:1;border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg);display:flex;align-items:center;justify-content:center;transition:all .4s ease;position:relative}
+.gallery-item:hover{transform:scale(1.03);box-shadow:var(--shadow-md);z-index:2}
+.gallery-item svg{width:40%;height:40%;opacity:0.12;color:var(--color-primary);transition:opacity .4s ease,transform .4s ease}
+.gallery-item:hover svg{opacity:0.2;transform:scale(1.15)}
+.gallery-cta{margin-top:36px;position:relative;z-index:2}
+.gallery-cta .follow-count{display:inline-flex;align-items:center;gap:6px;color:var(--color-text-light);font-size:.85rem;margin-bottom:14px}
+.gallery-cta .follow-count svg{width:16px;height:16px;opacity:0.5}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{background:var(--color-bg-dark);color:var(--color-text-on-dark);position:relative;overflow:hidden}
+.testimonials::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(196,155,94,0.2),transparent)}
+.testimonials .section-title{color:var(--color-cream)}
+.testimonials .section-subtitle{color:rgba(240,230,214,0.5)}
+.testimonials-carousel{max-width:620px;margin:40px auto 0;position:relative;min-height:200px}
+.testimonial-slide{background:rgba(255,255,255,0.03);border:1px solid rgba(196,155,94,0.08);border-radius:var(--radius-md);padding:36px 32px;display:none;animation:testFade .5s ease}
+.testimonial-slide.active{display:block}
+@keyframes testFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.testimonial-slide .quote-icon{color:var(--color-accent);font-size:1.8rem;font-family:var(--font-heading);line-height:1;opacity:0.3;margin-bottom:-8px}
+.testimonial-slide .quote{font-family:var(--font-heading);font-style:italic;font-size:1.1rem;line-height:1.7;color:rgba(240,230,214,0.8);margin-bottom:20px}
+.testimonial-slide .author{font-size:.82rem;color:var(--color-accent);font-weight:500;display:flex;align-items:center;gap:8px}
+.testimonial-slide .author::before{content:'';width:16px;height:1px;background:var(--color-accent);opacity:0.4}
+.testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.testimonial-dot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(196,155,94,0.3);background:transparent;cursor:pointer;transition:all .3s ease;padding:0}
+.testimonial-dot.active{background:var(--color-accent);border-color:var(--color-accent);width:24px;border-radius:4px}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--color-bg);position:relative}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:40px}
+.contact-info{display:flex;flex-direction:column;gap:20px}
+.contact-item{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;border-radius:var(--radius-md);transition:background .3s ease}
+.contact-item:hover{background:var(--color-warm)}
+.contact-item .icn{width:44px;height:44px;border-radius:50%;background:var(--color-warm);display:flex;align-items:center;justify-content:center;color:var(--color-primary);flex-shrink:0}
+.contact-item .icn svg{width:20px;height:20px}
+.contact-item .ct{font-weight:600;font-size:.88rem;color:var(--color-text)}
+.contact-item .cd{color:var(--color-text-light);font-size:.85rem;margin-top:3px;line-height:1.5}
+.contact-item a.cd{color:var(--color-primary);transition:color .2s}
+.contact-item a.cd:hover{color:var(--color-gold)}
+.contact-hours{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;padding:12px 0 4px}
+.contact-hours .day{font-size:.84rem;color:var(--color-text-light)}
+.contact-hours .time{font-size:.84rem;color:var(--color-text);font-weight:500;text-align:right}
+.contact-map-wrap{width:100%;aspect-ratio:16/11;border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg-alt);position:relative}
+.contact-map-wrap iframe{width:100%;height:100%;border:0}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--color-bg-dark);color:rgba(240,230,214,0.5);padding:56px 20px 40px;text-align:center}
+.footer-inner{max-width:var(--max-w);margin:0 auto}
+.footer-logo{font-family:var(--font-heading);font-size:1.8rem;font-weight:700;color:var(--color-accent);margin-bottom:6px;letter-spacing:.04em}
+.footer-tagline{font-size:.88rem;opacity:0.6;margin-bottom:4px}
+.footer-address{font-size:.8rem;opacity:0.4;margin-bottom:24px}
+.footer-socials{display:flex;justify-content:center;gap:12px;margin:0 0 28px}
+.footer-socials a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(196,155,94,0.15);display:flex;align-items:center;justify-content:center;color:var(--color-accent);transition:all .3s ease}
+.footer-socials a svg{width:16px;height:16px}
+.footer-socials a:hover{background:var(--color-accent);color:var(--color-bg-dark);border-color:var(--color-accent);transform:translateY(-2px)}
+.footer hr{border:none;border-top:1px solid rgba(196,155,94,0.08);margin:0 0 24px}
+.footer .copyright{font-size:.75rem;opacity:0.4}
+
+/* ===== WHATSAPP FAB ===== */
+.wfab{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:transform .3s ease,box-shadow .3s ease;text-decoration:none}
+.wfab svg{width:26px;height:26px}
+.wfab:hover{transform:scale(1.1) rotate(-5deg);box-shadow:0 6px 32px rgba(37,211,102,0.4);color:#fff}
+.wfab-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,0.2);animation:wfabPulse 2s infinite}
+@keyframes wfabPulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.4);opacity:0}}
+
+/* ===== BACK TO TOP ===== */
+.back-top{position:fixed;bottom:28px;left:28px;z-index:999;width:44px;height:44px;border-radius:50%;background:var(--color-bg-dark);color:var(--color-accent);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);opacity:0;transform:translateY(20px);transition:all .35s ease;pointer-events:none;border:1px solid rgba(196,155,94,0.15)}
+.back-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+.back-top svg{width:18px;height:18px}
+.back-top:hover{background:var(--color-accent);color:var(--color-bg-dark);border-color:var(--color-accent);transform:translateY(-3px)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--color-bg-alt)}
+::-webkit-scrollbar-thumb{background:var(--color-primary-light);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--color-primary)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px){section{padding:72px 0}.container{padding:0 16px}.hero h1{font-size:2.2rem}.btn{padding:12px 22px;font-size:.85rem}.hero-actions{flex-direction:column;align-items:center;gap:10px}.btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- ===== SCROLL PROGRESS ===== -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav" role="navigation" aria-label="Ana navigasyon">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a5 5 0 0 0-5 5c0 2.5 2 4.5 5 7 3-2.5 5-4.5 5-7a5 5 0 0 0-5-5z"/><path d="M7 18h10"/><path d="M9 21h6"/></svg>
+      Kiper<span>.</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapa" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">Hikayemiz</a>
+      <a href="#menu">Menü</a>
+      <a href="#cakes">Tasarım Pasta</a>
+      <a href="#gallery">Galeri</a>
+      <a href="#contact">İletişim</a>
+      <a href="https://wa.me/902128810444" class="nav-cta" target="_blank" rel="noopener">Sipariş Ver</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"><div class="hero-bg-inner"></div></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+
+  <!-- Floating decorations -->
+  <div class="floating-dec" style="top:15%;left:5%;width:80px;height:80px">
+    <svg viewBox="0 0 80 80" fill="none" stroke="var(--color-accent)" stroke-width="0.5"><circle cx="40" cy="40" r="35"/><path d="M25 40 L35 50 L55 30" stroke-width="1.5"/></svg>
+  </div>
+  <div class="floating-dec" style="bottom:20%;right:6%;width:60px;height:60px">
+    <svg viewBox="0 0 60 60" fill="none" stroke="var(--color-accent)" stroke-width="0.5"><path d="M30 5 L35 25 L55 25 L38 37 L45 57 L30 45 L15 57 L22 37 L5 25 L25 25 Z"/></svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg>
+      Büyükçekmece'nin Markası · 1971
+    </div>
+    <h1>Doğal Ürünlerle<br>Yapılan <em>Dayanılmaz Lezzetler</em></h1>
+    <p>1971'den beri Büyükçekmece'de aile sıcaklığıyla hazırladığımız pastalar, baklavalar ve enfes tatlılarla sofralarınıza lezzet katıyoruz.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 20 6-16 6 16"/><path d="m8 14 8 0"/></svg>
+        Menümüzü Keşfedin
+      </a>
+      <a href="https://wa.me/902128810444" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        WhatsApp Sipariş
+      </a>
+      <a href="#about" class="btn btn-secondary">Hikayemiz</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 34" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="30" rx="10"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
+    <span>Kaydır</span>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual" data-reveal="left">
+        <div class="about-accent"></div>
+        <div class="about-image-wrap">
+          <svg class="about-illustration" viewBox="0 0 200 150" fill="none">
+            <!-- Pastry shop illustration -->
+            <rect x="30" y="45" width="140" height="95" rx="8" fill="currentColor" opacity="0.15"/>
+            <rect x="30" y="45" width="140" height="95" rx="8" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+            <rect x="55" y="65" width="35" height="25" rx="4" fill="currentColor" opacity="0.2"/>
+            <rect x="110" y="65" width="35" height="25" rx="4" fill="currentColor" opacity="0.2"/>
+            <rect x="55" y="100" width="35" height="25" rx="4" fill="currentColor" opacity="0.2"/>
+            <rect x="110" y="100" width="35" height="25" rx="4" fill="currentColor" opacity="0.2"/>
+            <rect x="80" y="18" width="40" height="30" rx="5" fill="currentColor" opacity="0.12"/>
+            <rect x="80" y="18" width="40" height="30" rx="5" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            <path d="M90 25 L100 25 M95 20 L95 30" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+            <path d="M35 48 L50 35 L70 35 L65 48" stroke="currentColor" stroke-width="0.6" fill="currentColor" opacity="0.08"/>
+            <circle cx="160" cy="55" r="12" fill="currentColor" opacity="0.08"/>
+            <circle cx="160" cy="55" r="6" fill="currentColor" opacity="0.12"/>
+          </svg>
+          <div class="about-badge">
+            1971 <small>Kuruluş Yılı</small>
+          </div>
+        </div>
+      </div>
+      <div class="about-text" data-reveal="right">
+        <div class="section-label">Hikayemiz</div>
+        <h2 class="section-title">Büyükçekmece ile Beraber Büyüyen Lezzet</h2>
+        <p class="lead">Kurucumuz Rahmetli Kadir Kiper'in 1971 yılında Küçükçekmece'de kurduğu Şeyda Pastanesi'nde başlayan yolculuk, bugün Şahin Kiper ve Nesrin Kiper öncülüğünde devam ediyor.</p>
+        <p>O günden bu güne, Büyükçekmece ile beraber büyüyen ve gelişen Kiper Pastanesi, kökleşmiş aile şirketini yaşatmak ve hizmetlerini genişleterek devam ettirmektedir. Şubeleşerek büyümek yerine, hizmetimizde maksimum kaliteyi yakalamayı ideal edindik.</p>
+        <p>Üretimlerimizde kullandığımız hammaddeleri özenle seçerek, size sağlıklı ve lezzetli sonuçlar sunmayı hedefliyoruz. Bize göre kutsal olan bu yolda, yıllardır bizimle yolculuk yapan tüm müşterilerimize sonsuz teşekkür ederiz.</p>
+        <div class="about-stats">
+          <div class="about-stat"><span class="num" data-count="1971">0</span><span class="lbl">Kuruluş</span></div>
+          <div class="about-stat"><span class="num" data-count="32">0</span><span class="lbl">Çalışan</span></div>
+          <div class="about-stat"><span class="num" data-count="12600">0</span><span class="lbl">Takipçi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider"><div class="divider-inner"><span class="divider-icon">✦</span></div></div>
+
+<!-- ===== MENU ===== -->
+<section class="menu" id="menu">
+  <div class="menu-bg-pat"></div>
+  <div class="container section-center">
+    <div class="section-label">Lezzetlerimiz</div>
+    <h2 class="section-title">Enfes Pasta ve Tatlılarımız</h2>
+    <p class="section-subtitle">Her biri özenle, doğal malzemelerle ve yılların tecrübesiyle hazırlanan lezzetlerimiz.</p>
+    <div class="menu-tabs" role="tablist">
+      <button class="menu-tab active" data-tab="pastalar" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a5 5 0 0 0-5 5c0 2.5 2 4.5 5 7 3-2.5 5-4.5 5-7a5 5 0 0 0-5-5z"/><path d="M7 18h10"/><path d="M9 21h6"/></svg>
+        Pastalar &amp; Sütlü Tatlılar
+      </button>
+      <button class="menu-tab" data-tab="baklava" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Baklava &amp; Şerbetli Tatlılar
+      </button>
+      <button class="menu-tab" data-tab="servis" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18l-2 14H5L3 7z"/><path d="M8 7V3h8v4"/><circle cx="12" cy="14" r="2"/></svg>
+        Servislerimiz
+      </button>
+    </div>
+
+    <!-- Tab 1: Pastalar -->
+    <div class="menu-section active" id="tab-pastalar">
+      <div class="menu-grid stagger">
+        <div class="menu-item"><div class="name">Milföy, Muzlu Rulo, Tinton, Ballı<span class="price-tag">Adet</span></div><div class="desc">Fırından taze çıkan nefis çeşitler</div></div>
+        <div class="menu-item"><div class="name">Kiper Klasik<span class="price-tag">Adet</span></div><div class="desc">Pastanemizin imza lezzeti</div></div>
+        <div class="menu-item"><div class="name">Karon ve Ibıza<span class="price-tag">Adet</span></div><div class="desc">Özel krema ile hazırlanmış pastalar</div></div>
+        <div class="menu-item"><div class="name">San Sebastian Cheesecake</div><div class="desc">İspanyol usulü yanmış cheesecake</div></div>
+        <div class="menu-item"><div class="name">Profiterol Soslu Magnolya</div><div class="desc">Kat kat profiterol ve krema</div></div>
+        <div class="menu-item"><div class="name">Şeker Hamur Figürlü Pasta</div><div class="desc">Özel günleriniz için figürlü pastalar</div></div>
+        <div class="menu-item"><div class="name">Fırın Sütlaç, Kazandibi, Tavuk Göğsü</div><div class="desc">Geleneksel sütlü tatlılarımız</div></div>
+        <div class="menu-item"><div class="name">Supangle, Profiterol, Keşkül</div><div class="desc">Klasik tatlı çeşitlerimiz</div></div>
+        <div class="menu-item"><div class="name">Magnolya Çeşitleri</div><div class="desc">Çeşit çeşit magnolya tatlıları</div></div>
+        <div class="menu-item"><div class="name">Special Muhallebi Çeşitleri</div><div class="desc">Özel tarifimizle muhallebiler</div></div>
+        <div class="menu-item"><div class="name">Trileçe &amp; Tiramisu</div><div class="desc">İtalyan ve Latin lezzetleri</div></div>
+        <div class="menu-item"><div class="name">Minik / Büyük Ekler</div><div class="desc">Çikolata kaplı ekler çeşitleri</div></div>
+        <div class="menu-item"><div class="name">Petifür Çeşitleri</div><div class="desc">4'lü petifür paketleri</div></div>
+        <div class="menu-item"><div class="name">Aşure</div><div class="desc">Mevsimine göre aşure</div></div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Baklava -->
+    <div class="menu-section" id="tab-baklava">
+      <div class="menu-grid stagger">
+        <div class="menu-item"><div class="name">Kuru Baklava<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Ev Baklavası<span class="price-tag">Adet / 4'lü</span></div><div class="desc">Geleneksel ev usulü baklava</div></div>
+        <div class="menu-item"><div class="name">Cevizli Baklava<span class="price-tag">Adet / 4'lü</span></div><div class="desc">Taze cevizle hazırlanmış</div></div>
+        <div class="menu-item"><div class="name">Fıstıklı Baklava<span class="price-tag">Adet / 4'lü</span></div><div class="desc">Antep fıstığı ile</div></div>
+        <div class="menu-item"><div class="name">Fıstıklı Midye Baklava<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Cevizli Midye Baklava<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Fıstıklı Şöbiyet<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Bülbül Yuvası<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Fıstık Sarma<span class="price-tag">Adet / 4'lü</span></div></div>
+        <div class="menu-item"><div class="name">Fıstık Special Baklava<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Saray Sarma<span class="price-tag">Adet / 6'lı</span></div></div>
+        <div class="menu-item"><div class="name">Burma Kadayıf<span class="price-tag">Adet / 2'li</span></div></div>
+        <div class="menu-item"><div class="name">Soğuk Baklava<span class="price-tag">Adet / 4'lü</span></div><div class="desc">Soğuk servis edilen özel baklava</div></div>
+        <div class="menu-item"><div class="name">Şekerpare<span class="price-tag">Adet / 3'lü</span></div></div>
+        <div class="menu-item"><div class="name">Fıstıklı Kadayıf</div><div class="desc">Telli kadayıf fıstıkla</div></div>
+        <div class="menu-item"><div class="name">Havuç Dilim</div><div class="desc">Özel dilim baklava</div></div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Servis -->
+    <div class="menu-section" id="tab-servis">
+      <div class="menu-grid stagger" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+        <div class="menu-item" style="text-align:center;padding:32px 20px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.2" style="width:32px;height:32px;margin:0 auto 10px;opacity:0.3"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <div class="name" style="font-size:1.05rem">Kahvaltı</div>
+          <div class="desc">Haftanın Her Günü</div>
+        </div>
+        <div class="menu-item" style="text-align:center;padding:32px 20px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.2" style="width:32px;height:32px;margin:0 auto 10px;opacity:0.3"><path d="M12 2a5 5 0 0 1 5 5c0 2-2 4-5 7-3-3-5-5-5-7a5 5 0 0 1 5-5z"/><line x1="7" y1="18" x2="17" y2="18"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
+          <div class="name" style="font-size:1.05rem">Öğle Yemeği</div>
+          <div class="desc">Haftanın Her Günü</div>
+        </div>
+        <div class="menu-item" style="text-align:center;padding:32px 20px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.2" style="width:32px;height:32px;margin:0 auto 10px;opacity:0.3"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="name" style="font-size:1.05rem">Akşam Yemeği</div>
+          <div class="desc">Haftanın Her Günü</div>
+        </div>
+        <div class="menu-item" style="text-align:center;padding:32px 20px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.2" style="width:32px;height:32px;margin:0 auto 10px;opacity:0.3"><path d="M21 10H3l2 10h14l2-10z"/><path d="M8 7V3h8v4"/></svg>
+          <div class="name" style="font-size:1.05rem">Paket Servis</div>
+          <div class="desc">Hızlı sipariş için WhatsApp</div>
+          <div style="margin-top:8px"><a href="https://wa.me/902128810444" style="color:var(--color-primary);font-weight:600;font-size:.85rem;text-decoration:underline">Mesaj Atın →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-cta-wrap">
+      <a href="https://qr.kirazsoft.com/#/anasayfa?c=QpKjUK&b=Dj4GVE&ci=1578&bi=1874&st=table" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
+        Dijital Menüyü Görüntüle
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider"><div class="divider-inner"><span class="divider-icon">✦</span></div></div>
+
+<!-- ===== DESIGN CAKES ===== -->
+<section class="cakes" id="cakes">
+  <div class="container section-center">
+    <div class="section-label">Özel Tasarımlar</div>
+    <h2 class="section-title">Kişisel Pastanızı Tasarlayalım</h2>
+    <p class="section-subtitle">Hayalinizdeki pastayı birlikte yaratıyor, her detayı özenle sizin için hazırlıyoruz.</p>
+    <div class="cakes-grid stagger">
+      <!-- Cake card 1: Çocuk Temalı -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><rect x="20" y="35" width="40" height="35" rx="4" fill="currentColor"/><path d="M30 35 v-8 h20 v8" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.5"/><circle cx="32" cy="48" r="4" fill="var(--color-bg-alt)" opacity="0.6"/><circle cx="40" cy="48" r="4" fill="var(--color-bg-alt)" opacity="0.6"/><circle cx="48" cy="48" r="4" fill="var(--color-bg-alt)" opacity="0.6"/><circle cx="36" cy="58" r="3" fill="var(--color-bg-alt)" opacity="0.6"/><circle cx="44" cy="58" r="3" fill="var(--color-bg-alt)" opacity="0.6"/><circle cx="40" cy="22" r="6" fill="currentColor" opacity="0.4"/></svg>
+          <div class="overlay"><span>Çocuk Temalı Pastalar</span></div>
+          <div class="label">Çocuk Temalı Pastalar</div>
+        </div>
+      </div>
+      <!-- Cake card 2: Yetişkin -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><rect x="22" y="30" width="36" height="40" rx="4" fill="currentColor"/><rect x="22" y="30" width="36" height="8" rx="2" fill="currentColor" opacity="0.4"/><path d="M30 38 v-6 h20 v6" fill="currentColor" opacity="0.3"/><circle cx="34" cy="46" r="2" fill="var(--color-bg-alt)" opacity="0.5"/><circle cx="46" cy="46" r="2" fill="var(--color-bg-alt)" opacity="0.5"/><path d="M38 55 l-8-9 h16 z" fill="currentColor" opacity="0.3"/><path d="M32 30 l8-10 l8 10" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/></svg>
+          <div class="overlay"><span>Yetişkin Temalı Pastalar</span></div>
+          <div class="label">Yetişkin Temalı Pastalar</div>
+        </div>
+      </div>
+      <!-- Cake card 3: Nişan & Düğün -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><rect x="24" y="32" width="32" height="38" rx="3" fill="currentColor"/><rect x="24" y="32" width="32" height="6" rx="2" fill="currentColor" opacity="0.5"/><path d="M28 38 v-4 h24 v4" fill="currentColor" opacity="0.25"/><path d="M35 25 l5-8 5 8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/><circle cx="36" cy="44" r="2" fill="var(--color-bg-alt)" opacity="0.4"/><circle cx="44" cy="44" r="2" fill="var(--color-bg-alt)" opacity="0.4"/><circle cx="40" cy="50" r="2" fill="var(--color-bg-alt)" opacity="0.4"/><circle cx="30" cy="50" r="1.5" fill="var(--color-bg-alt)" opacity="0.4"/><circle cx="50" cy="50" r="1.5" fill="var(--color-bg-alt)" opacity="0.4"/><path d="M34 60 l-4-6 h20 l-4 6" fill="currentColor" opacity="0.2"/></svg>
+          <div class="overlay"><span>Nişan &amp; Düğün Pastaları</span></div>
+          <div class="label">Nişan &amp; Düğün Pastaları</div>
+        </div>
+      </div>
+      <!-- Cake card 4: Maket -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><path d="M25 50 l15-25 l15 25" fill="currentColor" opacity="0.15"/><path d="M25 50 l15-25 l15 25" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/><rect x="22" y="47" width="36" height="25" rx="3" fill="currentColor" opacity="0.12"/><rect x="22" y="47" width="36" height="25" rx="3" stroke="currentColor" stroke-width="0.8" opacity="0.2"/><rect x="32" y="52" width="16" height="16" rx="2" fill="currentColor" opacity="0.15"/><circle cx="40" cy="60" r="3" fill="var(--color-bg-alt)" opacity="0.3"/></svg>
+          <div class="overlay"><span>Maket Pastalar</span></div>
+          <div class="label">Maket Pastalar</div>
+        </div>
+      </div>
+      <!-- Cake card 5: 3D -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><rect x="18" y="30" width="44" height="40" rx="3" fill="currentColor" opacity="0.1"/><rect x="18" y="30" width="44" height="40" rx="3" stroke="currentColor" stroke-width="0.8" opacity="0.2"/><rect x="26" y="22" width="28" height="18" rx="4" fill="currentColor" opacity="0.12"/><rect x="26" y="22" width="28" height="18" rx="4" stroke="currentColor" stroke-width="0.8" opacity="0.2"/><path d="M34 40 l6-12 l6 12" fill="currentColor" opacity="0.15"/><circle cx="34" cy="38" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="46" cy="38" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="40" cy="44" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><path d="M32 52 h16 v3 h-16 z" fill="currentColor" opacity="0.1"/></svg>
+          <div class="overlay"><span>3 Boyutlu Tasarım Pastalar</span></div>
+          <div class="label">3 Boyutlu Tasarım Pastalar</div>
+        </div>
+      </div>
+      <!-- Cake card 6: Baby Shower -->
+      <div class="cake-card" data-reveal="scale">
+        <div class="cake-card-inner">
+          <svg class="cake-icon" viewBox="0 0 80 80" fill="none"><rect x="22" y="36" width="36" height="32" rx="4" fill="currentColor" opacity="0.12"/><rect x="22" y="36" width="36" height="32" rx="4" stroke="currentColor" stroke-width="0.8" opacity="0.2"/><circle cx="40" cy="22" r="10" fill="currentColor" opacity="0.08"/><circle cx="40" cy="22" r="10" stroke="currentColor" stroke-width="0.8" opacity="0.15"/><circle cx="38" cy="20" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="42" cy="20" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="40" cy="24" r="1.5" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="32" cy="48" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="48" cy="48" r="2" fill="var(--color-bg-alt)" opacity="0.3"/><circle cx="36" cy="54" r="2" fill="var(--color-bg-alt)" opacity="0.3"/></svg>
+          <div class="overlay"><span>Baby Shower Pastalar</span></div>
+          <div class="label">Baby Shower Pastalar</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:36px">
+      <a href="https://wa.me/902128810444" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Hemen Sipariş Verin
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider"><div class="divider-inner"><span class="divider-icon">✦</span></div></div>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery">
+  <div class="container section-center">
+    <div class="section-label">Galeri</div>
+    <h2 class="section-title">Lezzetlerimizden Kareler</h2>
+    <p class="section-subtitle">Instagram'da bizi takip edin, daha fazlasına oradan ulaşın.</p>
+    <div class="gallery-grid stagger">
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><rect x="10" y="15" width="40" height="35" rx="3" fill="currentColor" opacity="0.1"/><rect x="10" y="15" width="40" height="35" rx="3" stroke="currentColor" stroke-width="0.6" opacity="0.15"/><path d="M22 30 l8-8 l8 8" stroke="currentColor" stroke-width="0.8" opacity="0.2"/><path d="M24 40 l6-12 l6 12" fill="currentColor" opacity="0.08"/><circle cx="38" cy="22" r="3" fill="currentColor" opacity="0.1"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><path d="M12 42 h36 l-6-20 h-24 z" fill="currentColor" opacity="0.1"/><path d="M12 42 h36 l-6-20 h-24 z" stroke="currentColor" stroke-width="0.6" opacity="0.15"/><path d="M22 22 l6-8 h4 l6 8" stroke="currentColor" stroke-width="0.8" opacity="0.15"/><circle cx="30" cy="30" r="4" fill="currentColor" opacity="0.06"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="18" fill="currentColor" opacity="0.08"/><circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><path d="M22 28 l8-8 8 8" stroke="currentColor" stroke-width="0.8" opacity="0.15"/><path d="M22 36 l8-8 8 8" stroke="currentColor" stroke-width="0.8" opacity="0.1"/><circle cx="30" cy="22" r="2" fill="currentColor" opacity="0.08"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="28" rx="16" ry="12" fill="currentColor" opacity="0.08"/><ellipse cx="30" cy="28" rx="16" ry="12" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><ellipse cx="25" cy="25" rx="3" ry="2" fill="currentColor" opacity="0.06"/><ellipse cx="35" cy="25" rx="3" ry="2" fill="currentColor" opacity="0.06"/><path d="M18 40 h24 v4 h-24 z" fill="currentColor" opacity="0.06"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><rect x="15" y="18" width="30" height="28" rx="4" fill="currentColor" opacity="0.08"/><rect x="15" y="18" width="30" height="28" rx="4" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><rect x="20" y="22" width="8" height="6" rx="1" fill="currentColor" opacity="0.06"/><rect x="32" y="22" width="8" height="6" rx="1" fill="currentColor" opacity="0.06"/><path d="M24 34 l6-6 6 6" stroke="currentColor" stroke-width="0.6" opacity="0.12"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><path d="M14 38 l16-22 16 22" fill="currentColor" opacity="0.08"/><path d="M14 38 l16-22 16 22" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><circle cx="30" cy="32" r="5" fill="currentColor" opacity="0.06"/><path d="M22 46 h16 v3 h-16 z" fill="currentColor" opacity="0.04"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="25" r="10" fill="currentColor" opacity="0.08"/><circle cx="30" cy="25" r="10" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><path d="M18 42 l12-12 12 12" stroke="currentColor" stroke-width="0.6" opacity="0.1"/><rect x="24" y="40" width="12" height="6" rx="1" fill="currentColor" opacity="0.06"/></svg></div>
+      <div class="gallery-item"><svg viewBox="0 0 60 60" fill="none"><rect x="16" y="20" width="28" height="28" rx="3" fill="currentColor" opacity="0.08"/><rect x="16" y="20" width="28" height="28" rx="3" stroke="currentColor" stroke-width="0.6" opacity="0.12"/><path d="M24 30 l6-6 6 6" stroke="currentColor" stroke-width="0.6" opacity="0.1"/><path d="M24 36 l6-6 6 6" stroke="currentColor" stroke-width="0.6" opacity="0.08"/><circle cx="34" cy="24" r="2" fill="currentColor" opacity="0.06"/></svg></div>
+    </div>
+    <div class="gallery-cta">
+      <div class="follow-count">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @kiperpastanesi — 12.6K+ takipçi
+      </div>
+      <a href="https://www.instagram.com/kiperpastanesi/" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram'da Takip Edin
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+  <div class="container section-center">
+    <div class="section-label" style="--color-primary-light:var(--color-accent);color:var(--color-accent)">Müşteri Yorumları</div>
+    <h2 class="section-title">Onlar Ne Diyor?</h2>
+    <p class="section-subtitle">Yıllardır bizi tercih eden müşterilerimizin görüşleri bizim için çok değerli.</p>
+    <div class="testimonials-carousel" data-reveal>
+      <div class="testimonial-slide active">
+        <div class="quote-icon">"</div>
+        <div class="quote">Geçenlerde bir müşterimiz dedi ki: 'Ben sevgilimle Kiper'e gelirdim, onunla evlendim, şimdi çocuğumla geliyorum.' Gerçekten de biz burada birkaç nesli ağırladık.</div>
+        <div class="author">Zeki Püsür, İşletme Müdürü</div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="quote-icon">"</div>
+        <div class="quote">Yıllardır her özel günümüzde pastalarımızı Kiper'den alıyoruz. Kalitesi ve lezzeti hiç değişmedi. Tasarım pastalarıyla da hayal ettiğimizden güzellerini yapıyorlar.</div>
+        <div class="author">Ayşe K., Sadık Müşteri</div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="quote-icon">"</div>
+        <div class="quote">Büyükçekmece'nin en iyi pastanesi. Baklavaları eşsiz, kahvaltıları harika. Herkese gönül rahatlığıyla tavsiye ediyorum. Mekanın atmosferi de ayrı güzel.</div>
+        <div class="author">Mehmet T., Google Yorumu</div>
+      </div>
+      <div class="testimonial-dots">
+        <button class="testimonial-dot active" data-slide="0" aria-label="1. yorum"></button>
+        <button class="testimonial-dot" data-slide="1" aria-label="2. yorum"></button>
+        <button class="testimonial-dot" data-slide="2" aria-label="3. yorum"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="container section-center">
+    <div class="section-label">İletişim</div>
+    <h2 class="section-title">Bize Ulaşın</h2>
+    <p class="section-subtitle">Rezervasyon ve siparişleriniz için bizi arayın veya WhatsApp'tan mesaj gönderin.</p>
+    <div class="contact-grid">
+      <div class="contact-info" data-reveal="left">
+        <div class="contact-item">
+          <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="ct">Telefon</div>
+            <a href="tel:02128810444" class="cd">0212 881 04 44</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div>
+            <div class="ct">WhatsApp</div>
+            <a href="https://wa.me/902128810444" target="_blank" rel="noopener" class="cd">0212 881 04 44</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <div class="ct">Adres</div>
+            <div class="cd">Fatih Mahallesi Gazi Mustafa Caddesi No:29<br>34500 Büyükçekmece / İstanbul</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div style="flex:1">
+            <div class="ct">Çalışma Saatleri</div>
+            <div class="contact-hours">
+              <span class="day">Pazartesi — Pazar</span>
+              <span class="time">08:30 — 22:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+          <div>
+            <div class="ct">Sosyal Medya</div>
+            <div style="display:flex;gap:14px;margin-top:5px">
+              <a href="https://www.instagram.com/kiperpastanesi/" target="_blank" rel="noopener" style="color:var(--color-primary);font-weight:500;font-size:.85rem">Instagram</a>
+              <a href="https://www.facebook.com/kiperpastanesi/" target="_blank" rel="noopener" style="color:var(--color-primary);font-weight:500;font-size:.85rem">Facebook</a>
+              <a href="https://www.tripadvisor.com.tr/Restaurant_Review-g23039285-d24070544-Reviews-Kiper_Pastanesi-Buyukcekmece.html" target="_blank" rel="noopener" style="color:var(--color-primary);font-weight:500;font-size:.85rem">TripAdvisor</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <div class="contact-map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385393.465239843!2d28.5897733!3d41.0179873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b55e8e8e8e8e8f%3A0x8e8e8e8e8e8e8e8e!2sKiper%20Pastanesi!5e0!3m2!1str!2str!4v1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kiper Pastanesi Konumu"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Kiper.</div>
+    <p class="footer-tagline">Doğal ürünlerle yapılan dayanılmaz lezzetler.</p>
+    <p class="footer-address">Fatih Mah. Gazi Mustafa Cd. No:29, 34500 Büyükçekmece/İstanbul</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/kiperpastanesi/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/kiperpastanesi/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://wa.me/902128810444" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+      <a href="https://www.tripadvisor.com.tr/Restaurant_Review-g23039285-d24070544-Reviews-Kiper_Pastanesi-Buyukcekmece.html" target="_blank" rel="noopener" aria-label="TripAdvisor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="12" r="4"/><circle cx="18" cy="12" r="4"/><path d="M12 8a4 4 0 0 1 0 8"/></svg>
+      </a>
+    </div>
+    <hr>
+    <p class="copyright">© 2024 Kiper Pastacılık ve Gıda Tic. Ltd. Şti. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FAB ===== -->
+<a href="https://wa.me/902128810444" class="wfab" target="_blank" rel="noopener" aria-label="WhatsApp'ten mesaj gönder">
+  <div class="wfab-pulse"></div>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" class="back-top" id="backTop" aria-label="Yukarı çık">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</a>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// === Mobile nav ===
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+const nav = document.getElementById('nav');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('active', open);
+  navToggle.setAttribute('aria-expanded', open);
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// === Scroll hide/show nav ===
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const cs = window.pageYOffset;
+  if (cs > 150) {
+    nav.style.transform = cs > lastScroll ? 'translateY(-100%)' : 'translateY(0)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastScroll = cs;
+}, { passive: true });
+
+// === Scroll progress bar ===
+const scrollBar = document.getElementById('scrollBar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  scrollBar.style.width = h > 0 ? (window.pageYOffset / h * 100) + '%' : '0%';
+}, { passive: true });
+
+// === Intersection Observer for reveals ===
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('[data-reveal], .stagger').forEach(el => obs.observe(el));
+
+// === Counter animation ===
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      if (!target || el.dataset.animated) return;
+      el.dataset.animated = 'true';
+      const duration = 1500;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = target < 1000 ? Math.floor(eased * target) : (Math.floor(eased * target / 100) * 100).toLocaleString('tr-TR');
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target >= 1000 ? (target / 1000).toFixed(1) + 'K+' : target;
+      };
+      requestAnimationFrame(step);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+// === Menu tabs ===
+const tabs = document.querySelectorAll('.menu-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    const grid = document.querySelector('.menu-section.active .menu-grid');
+    if (grid) {
+      grid.classList.remove('visible');
+      setTimeout(() => grid.classList.add('visible'), 60);
+    }
+  });
+});
+
+// Activate initial staggers
+document.querySelectorAll('.stagger').forEach(el => {
+  if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+});
+
+// === Testimonial carousel ===
+const slides = document.querySelectorAll('.testimonial-slide');
+const dots = document.querySelectorAll('.testimonial-dot');
+let currentSlide = 0;
+let slideInterval;
+
+function showSlide(idx) {
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  slides[idx].classList.add('active');
+  dots[idx].classList.add('active');
+  currentSlide = idx;
+}
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    clearInterval(slideInterval);
+    showSlide(parseInt(dot.dataset.slide));
+    startSlideAutoplay();
+  });
+});
+
+function startSlideAutoplay() {
+  slideInterval = setInterval(() => {
+    showSlide((currentSlide + 1) % slides.length);
+  }, 5000);
+}
+startSlideAutoplay();
+
+// === Back to top ===
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.pageYOffset > 500);
+}, { passive: true });
+
+// === Hero parallax ===
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  if (scrolled < window.innerHeight) {
+    heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+  }
+}, { passive: true });
+
+console.log('🍰 Kiper Pastanesi — 1971\'den Beri');
+</script>
+</body>
+</html>
